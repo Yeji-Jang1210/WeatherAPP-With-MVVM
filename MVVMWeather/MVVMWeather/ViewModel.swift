@@ -19,8 +19,12 @@ class WeatherViewModel : ObservableObject{
         fetchWeather()
     }
     
+    //latitude: 위도
+    //longitude: 경도
+    //서울의 경우(반올림): lat: 37, lon: 126
+    
     func fetchWeather(){
-        guard let url = URL(string:"https://api.openweathermap.org/data/2.5/onecall?lat=43&lon=131&exclude=hourly,daily,minutely&appid=011403b307bff9d59e037082360b03a1")
+        guard let url = URL(string:"https://api.openweathermap.org/data/2.5/onecall?lat=35&lon=139&exclude=hourly,daily,minutely&appid=011403b307bff9d59e037082360b03a1")
         else{
             return
         }

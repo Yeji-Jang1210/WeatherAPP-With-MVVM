@@ -12,8 +12,14 @@ struct PersistenceController {
 
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
+        
+        //Core Data 스택에서 사용되는 viewContext를 얻을 수 있음. 데이터를 생성, 수정 및 저장
         let viewContext = result.container.viewContext
+        
+        //10개의 Item 엔티티 생성
         for _ in 0..<10 {
+            
+            //MVVMWeather.xcdatamodel에 정의한 Item 엔티티에 attribute인 timestamp에 값 저장
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
         }
@@ -28,8 +34,10 @@ struct PersistenceController {
         return result
     }()
 
+    //Core Data Stack의 생성과 관리를 좀더 간단하게 해줄 수 있는 클래스
     let container: NSPersistentContainer
-
+    
+    //inMemory 매개변수를 통해 메모리에 데이터를 저장할지 여부를 제어
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "MVVMWeather")
         if inMemory {
